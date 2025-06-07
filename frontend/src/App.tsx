@@ -35,23 +35,31 @@ export const App: React.FC = () => {
     }, []);
 
     const handleAnalyze = useCallback(async () => {
-    if (photos.length === 0) return;
-    setLoading(true);
+        if (photos.length === 0) return;
+        setLoading(true);
 
-    const formData = new FormData();
-    photos.forEach((file) => formData.append('files', file));
+        const formData = new FormData();
+        photos.forEach((file) => formData.append('files', file));
 
-    const resp = await fetch('http://localhost:8000/api/analyze', {
-        method: 'POST',
-        body: formData,
-    });
+        const resp = await fetch('http://localhost:8000/api/analyze', {
+            method: 'POST',
+            body: formData,
+        });
 
-    const result = (await resp.json()) as { data: PartStatus[]; finalScore: number };
+        const result = (await resp.json()) as { data: PartStatus[]; finalScore: number };
 
-    setTableData(result.data);
-    setFinalScore(result.finalScore);
-    setLoading(false);
-}, [photos]);
+        const enriched = result.data.map(part => {
+            const match = initialData.find(d => d.id === part.id);
+            return {
+                ...part,
+                label: match?.label ?? part.id,
+            };
+        });
+
+        setTableData(enriched);
+        setFinalScore(result.finalScore);
+        setLoading(false);
+    }, [photos]);
 
     return (
         <div className={styles.layout}>
