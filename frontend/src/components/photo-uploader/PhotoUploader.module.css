@@ -1,0 +1,39 @@
+.uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dropZone {
+  position: relative;
+  padding: 32px;
+  border: 2px dashed var(--g-color-border);
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.dropZone:hover,
+.dragOver {
+  border-color: var(--g-color-border-accent);
+  background-color: var(--g-color-base-accent);
+}
+
+.icon {
+  color: var(--g-color-text-secondary);
+  margin-bottom: 12px;
+}
+
+.instruction {
+  color: var(--g-color-text-secondary);
+}
+
+.browse {
+  color: var(--g-color-link);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.browse input {
+  display: none;
+}

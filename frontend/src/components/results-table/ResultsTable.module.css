@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  border: 1px solid var(--g-color-border);
+  text-align: left;
+}
+
+.table th {
+  background: var(--g-color-base-accent);
+}
+
+.footer {
+  margin-top: 12px;
+  font-weight: 600;
+}

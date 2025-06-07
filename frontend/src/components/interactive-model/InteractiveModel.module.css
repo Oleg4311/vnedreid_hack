@@ -1,0 +1,49 @@
+/* InteractiveModel.module.css */
+.container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.bgImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.part {
+  cursor: pointer;
+  transition: fill-opacity 0.2s;
+}
+.part:hover {
+  fill-opacity: 0.8;
+}
+.tooltip {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+.tooltipArrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-left: 1px solid #666;
+  border-top: 1px solid #666;
+  transform: rotate(45deg);
+  top: 50%;
+  left: -4px;
+}
+.tooltipBody {
+  margin-left: 4px;
+}
