@@ -49,14 +49,19 @@ export const initialData: PartStatus[] = [
 ];
 
 export const ZONES: { id: PartId; points: string }[] = [
-  { id: 'hood', points: '60,80 140,80 160,130 40,130' },
+  { id: 'hood', points: '40,80 160,80 160,110 40,110' },
   { id: 'front_bumper', points: '50,40 150,40 160,80 40,80' },
-  { id: 'roof', points: '50,130 150,130 150,240 50,240' },
-  { id: 'rear_bumper', points: '60,240 140,240 150,280 50,280' },
-  { id: 'left_fender_front', points: '40,80 20,100 40,130' },
-  { id: 'right_fender_front', points: '160,80 180,100 160,130' },
-  { id: 'left_fender_rear', points: '40,130 20,170 40,200' },
-  { id: 'right_fender_rear', points: '160,130 180,170 160,200' },
+
+  { id: 'roof', points: '40,110 160,110 160,260 40,260' },
+
+  { id: 'rear_bumper', points: '40,260 160,260 140,300 60,300' },
+
+  { id: 'left_fender_front', points: '40,80 25,140 40,170' },
+  { id: 'right_fender_front', points: '160,80 175,140 160,170' },
+
+  { id: 'left_fender_rear', points: '40,170 25,210 40,260' },
+  { id: 'right_fender_rear', points: '160,170 175,210 160,260' },
+
   { id: 'left_headlight', points: '60,60 70,60 70,70 60,70' },
   { id: 'right_headlight', points: '130,60 140,60 140,70 130,70' },
 ];
