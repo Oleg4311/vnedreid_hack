@@ -35,30 +35,33 @@ export const App: React.FC = () => {
     }, []);
 
     const handleAnalyze = useCallback(async () => {
-        if (photos.length === 0) return;
-        setLoading(true);
+    if (photos.length === 0) return;
+    setLoading(true);
 
-        const formData = new FormData();
-        photos.forEach((file) => formData.append('files', file));
+    const formData = new FormData();
+    photos.forEach((file) => formData.append('files', file));
 
-        const resp = await fetch('http://localhost:8000/api/analyze', {
-            method: 'POST',
-            body: formData,
-        });
+    const resp = await fetch('http://localhost:8000/api/analyze', {
+        method: 'POST',
+        body: formData,
+    });
 
-        const result = (await resp.json()) as { data: PartStatus[]; finalScore: number };
+    const result = (await resp.json()) as { data: PartStatus[]; finalScore: number };
 
-        const enriched = result.data.map(part => {
-            const match = initialData.find(d => d.id === part.id);
-            return {
-                ...part,
-                label: match?.label ?? part.id,
-            };
-        });
+    const enriched: PartStatus[] = initialData.map(base => {
+        const match = result.data.find(p => p.id === base.id);
+        return match
+            ? {
+                ...base,
+                status: match.status,
+                score: typeof match.score === 'number' ? match.score : Number(match.score) || null,
+            }
+            : base;
+    });
 
-        setTableData(enriched);
-        setFinalScore(result.finalScore);
-        setLoading(false);
+    setTableData(enriched);
+    setFinalScore(result.finalScore);
+    setLoading(false);
     }, [photos]);
 
     return (

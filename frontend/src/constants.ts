@@ -1,6 +1,8 @@
 export type PartId =
   | 'hood'
   | 'front_bumper'
+  | 'windshield'
+  | 'rear_window'
   | 'rear_bumper'
   | 'left_headlight'
   | 'right_headlight'
@@ -36,6 +38,7 @@ export interface ResultsTableProps {
 }
 
 export const initialData: PartStatus[] = [
+  { id: 'windshield', label: 'Лобовое стекло', status: 'Не видно', score: null },
   { id: 'hood', label: 'Капот', status: 'Не видно', score: null },
   { id: 'front_bumper', label: 'Передний бампер', status: 'Не видно', score: null },
   { id: 'rear_bumper', label: 'Задний бампер', status: 'Не видно', score: null },
@@ -46,22 +49,48 @@ export const initialData: PartStatus[] = [
   { id: 'left_fender_rear', label: 'Левое заднее крыло', status: 'Не видно', score: null },
   { id: 'right_fender_rear', label: 'Правое заднее крыло', status: 'Не видно', score: null },
   { id: 'roof', label: 'Крыша', status: 'Не видно', score: null },
+  { id: 'rear_window', label: 'Заднее стекло', status: 'Не видно', score: null },
 ];
 
 export const ZONES: { id: PartId; points: string }[] = [
-  { id: 'hood', points: '40,80 160,80 160,110 40,110' },
-  { id: 'front_bumper', points: '50,40 150,40 160,80 40,80' },
+  // Передний бампер
+  { id: 'front_bumper', points: '65,10 140,10 145,35 60,35' },
 
-  { id: 'roof', points: '40,110 160,110 160,260 40,260' },
+  // Капот
+  { id: 'hood', points: '60,35 146,35 146,92 60,92' },
 
-  { id: 'rear_bumper', points: '40,260 160,260 140,300 60,300' },
+  // Лобовое стекло
+  { id: 'windshield', points: '60,92 146,92 136,128 70,128' },
 
-  { id: 'left_fender_front', points: '40,80 25,140 40,170' },
-  { id: 'right_fender_front', points: '160,80 175,140 160,170' },
+  // Крыша
+  { id: 'roof', points: '70,128 136,128 136,240 70,240' },
 
-  { id: 'left_fender_rear', points: '40,170 25,210 40,260' },
-  { id: 'right_fender_rear', points: '160,170 175,210 160,260' },
+  // Заднее стекло
+  { id: 'rear_window', points: '70,240 136,240 140,290 65,290' },
 
-  { id: 'left_headlight', points: '60,60 70,60 70,70 60,70' },
-  { id: 'right_headlight', points: '130,60 140,60 140,70 130,70' },
+  // Задний бампер
+  { id: 'rear_bumper', points: '65,290 140,290 155,310 50,310' },
+
+  // Левое переднее крыло
+  { id: 'left_fender_front', points: '60,35 45,72 60,110' },
+
+  // Правое переднее крыло
+  { id: 'right_fender_front', points: '145,35 160,72 145,110' },
+
+  // Левое заднее крыло (приклеено к крыше и бамперу)
+  { id: 'left_fender_rear', points: '70,240 55,265 65,290' },
+
+  // Правое заднее крыло (зеркально)
+  { id: 'right_fender_rear', points: '136,240 151,265 140,290' },
+
+  // Левая фара (скошенная)
+  { id: 'left_headlight', points: '68,22 84,18 86,28 70,32' },
+
+  // Правая фара (зеркально сдвинутая)
+  { id: 'right_headlight', points: '138,22 122,18 120,28 136,32' },
 ];
+
+
+
+
+

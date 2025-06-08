@@ -47,31 +47,30 @@ export const InteractiveModel: React.FC<InteractiveModelProps> = ({ statuses }) 
           </filter>
         </defs>
 
-        <path
-          d="M100,20 C60,20 30,50 30,80 L30,240 C30,280 60,310 100,310 C140,310 170,280 170,240 L170,80 C170,50 140,20 100,20 Z"
-          fill="#e0e0e0"
-          stroke="#555"
-          strokeWidth={2}
-          filter="url(#shadow)"
+        {/* Фоновое изображение автомобиля */}
+        <image
+          href="/images/car-top-realistic.png"
+          x="0"
+          y="0"
+          width="200"
+          height="320"
+          preserveAspectRatio="xMidYMid meet"
         />
 
-        <ellipse cx={100} cy={150} rx={60} ry={40} fill="#444" opacity={0.5} />
-        <ellipse cx={100} cy={260} rx={60} ry={30} fill="#444" opacity={0.5} />
-        <circle cx={60} cy={100} r={15} fill="#222" />
-        <circle cx={140} cy={100} r={15} fill="#222" />
-        <circle cx={60} cy={260} r={15} fill="#222" />
-        <circle cx={140} cy={260} r={15} fill="#222" />
-
+        {/* Контуры зон */}
         {ZONES.map(z => (
-          <polygon
-            key={z.id + '_outline'}
-            points={z.points}
-            fill="transparent"
-            stroke="#999"
-            strokeWidth={1}
-          />
+          statusMap[z.id]?.score !== null && (
+            <polygon
+              key={z.id + '_outline'}
+              points={z.points}
+              fill="transparent"
+              stroke="#999"
+              strokeWidth={1}
+            />
+          )
         ))}
 
+        {/* Закрашенные зоны */}
         {ZONES.map(z => (
           <polygon
             key={z.id}
