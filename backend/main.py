@@ -35,7 +35,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = MANet(num_parts=10).to(DEVICE)
 
-ckpt_path = BASE_DIR / "model" / "checkpoint_MAnet_damages1.pth"
+ckpt_path = BASE_DIR / "model" / "checkpoint_MAnet_damages_Dice_best_loss.pth"
 ckpt = torch.load(ckpt_path, map_location=DEVICE, weights_only=False)
 state_dict = ckpt.get("model_state_dict", ckpt)
 model.load_state_dict(state_dict, strict=False)
