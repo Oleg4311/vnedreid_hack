@@ -18,11 +18,20 @@ export type PartId =
   | 'left_mirror'
   | 'right_mirror';
 
+export interface BBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export interface PartStatus {
   id: PartId;
   label: string;
   status: 'Бита' | 'Не бита' | 'Не видно';
   score: number | null;
+  damage_class?: string;
+  box?: BBox;
 }
 
 export interface PhotoUploaderProps {

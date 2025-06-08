@@ -35,33 +35,38 @@ export const App: React.FC = () => {
     }, []);
 
     const handleAnalyze = useCallback(async () => {
-    if (photos.length === 0) return;
-    setLoading(true);
+        if (photos.length === 0) return;
+        setLoading(true);
 
-    const formData = new FormData();
-    photos.forEach((file) => formData.append('files', file));
+        const formData = new FormData();
+        photos.forEach((file) => formData.append('files', file));
 
-    const resp = await fetch('http://localhost:8000/api/analyze', {
-        method: 'POST',
-        body: formData,
-    });
+        const resp = await fetch('http://localhost:8000/api/analyze', {
+            method: 'POST',
+            body: formData,
+        });
 
-    const result = (await resp.json()) as { data: PartStatus[]; finalScore: number };
+        const result = await resp.json();
 
-    const enriched: PartStatus[] = initialData.map(base => {
-        const match = result.data.find(p => p.id === base.id);
-        return match
-            ? {
-                ...base,
-                status: match.status,
-                score: typeof match.score === 'number' ? match.score : Number(match.score) || null,
-            }
-            : base;
-    });
+        console.log('backend result:', result.data);
+        console.log('frontend base ids:', initialData.map(i => i.id));
 
-    setTableData(enriched);
-    setFinalScore(result.finalScore);
-    setLoading(false);
+        const enriched: PartStatus[] = initialData.map(base => {
+            const match = result.data.find((p: any) => p.id === base.id);
+            return match
+                ? {
+                    ...base,
+                    status: match.status,
+                    score: typeof match.score === 'number' ? match.score : Number(match.score) || null,
+                    damage_class: match.damage_class,
+                    box: match.box,
+                }
+                : base;
+        });
+
+        setTableData(enriched);
+        setFinalScore(result.finalScore);
+        setLoading(false);
     }, [photos]);
 
     return (

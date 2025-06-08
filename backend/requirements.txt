@@ -5,3 +5,7 @@ torch
 torchvision
 python-multipart
 segmentation-models-pytorch
+scikit-learn
+scikit-image
+plotly
+python-dotenv
